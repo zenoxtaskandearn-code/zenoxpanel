@@ -1,0 +1,34 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb;MODE=MySQL;DB_CLOSE_DELAY=-1;DATABASE_TO_LOWER=TRUE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+  flyway:
+    enabled: false
+
+app:
+  security:
+    jwt:
+      secret: test-secret-key-test-secret-key-123456
+      access-token-minutes: 30
+      refresh-token-days: 7
+      device-access-token-minutes: 60
+      issuer: gallery-platform-test
+    cors:
+      allowed-origins: http://localhost:5173
+    registration:
+      enabled: true
+      invite-code: ""
+  websocket:
+    allowed-origins: http://localhost:5173
+  rate-limit:
+    requests-per-minute: 1000
+  operations:
+    default-expiry-minutes: 30

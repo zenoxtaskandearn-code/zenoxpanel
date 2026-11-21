@@ -1,0 +1,43 @@
+# Example Render blueprint. Adjust names/regions/plan and use a managed MySQL provider (external).
+# Render native managed databases are PostgreSQL; this project uses MySQL (external provider) as specified.
+services:
+  - type: web
+    name: gallery-backend
+    runtime: docker
+    plan: free
+    rootDir: backend
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /actuator/health
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+      - key: PORT
+        value: 8080
+      - key: SPRING_DATASOURCE_URL
+        sync: false
+      - key: SPRING_DATASOURCE_USERNAME
+        sync: false
+      - key: SPRING_DATASOURCE_PASSWORD
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: ADMIN_REGISTRATION_ENABLED
+        value: "false"
+      - key: CORS_ALLOWED_ORIGINS
+        sync: false
+      - key: WS_ALLOWED_ORIGINS
+        sync: false
+
+  - type: web
+    name: gallery-frontend
+    runtime: static
+    rootDir: frontend
+    buildCommand: npm ci && npm run build
+    staticPublishPath: dist
+    envVars:
+      - key: VITE_API_BASE_URL
+        sync: false
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
