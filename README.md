@@ -5,7 +5,7 @@ A web platform for administering registered devices and their indexed gallery me
 This repository contains:
 - **Backend**: Spring Boot 3 (Java 21), Spring Security, JPA, Flyway, MySQL, JWT, WebSocket/STOMP, Maven
 - **Frontend**: React (Vite, JavaScript), Tailwind CSS, Lucide React, Axios, React Router, TanStack Query
-- **Database**: MySQL (external provider supported; Flyway migrations included)
+- **Database**: PostgreSQL (Render Postgres supported; Flyway migrations included). MySQL driver also present, but current migrations are PostgreSQL-oriented.
 - **Deployment targets**: Render Web Service (backend, Docker) + Render Static Site (frontend)
 
 > **Important:** The Android APK/device agent is **not** included in this repository and will be built separately. Actual media access and remote media operations (preview/edit/delete execution on device content) must be authorized and executed by the Android application. This platform provides backend contracts, authentication, validation, request tracking, audit logging, and an admin dashboard.

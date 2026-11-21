@@ -3,15 +3,15 @@
 This project is designed for:
 - **Backend**: Render Web Service (Docker) running Spring Boot on port `$PORT`
 - **Frontend**: Render Static Site (Vite build) with SPA rewrite to `index.html`
-- **Database**: External MySQL provider (Render managed databases are PostgreSQL; MySQL is used by requirement)
+- **Database**: PostgreSQL (Render Postgres supported/recommended) or external PostgreSQL. MySQL driver is also included, but migrations/config have been set up for PostgreSQL in this repo state.
 
 > Do **not** claim a deployment is successful unless it has actually been deployed and verified in the target environment.
 
 ## 1. Prerequisites
 - A Git repository containing this project (push to GitHub/GitLab) or use Render Blueprint from the repo
-- An external MySQL 8 database (e.g. Aiven, PlanetScale/MySQL-compatible provider, Railway MySQL, DigitalOcean, or any managed MySQL). Collect:
-  - JDBC URL, username, password
-  - Ensure the database allows connections from Render (networking/SSL as required by provider)
+- A PostgreSQL database (Render Postgres or external). Collect:
+  - JDBC URL (e.g. `jdbc:postgresql://<host>:5432/<db>?sslmode=require`), username, password
+  - Ensure the database allows connections from Render (SSL/networking as required by provider)
 - Render account
 
 ## 2. Environment variables

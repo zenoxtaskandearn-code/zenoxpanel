@@ -1,5 +1,5 @@
-# Example Render blueprint. Adjust names/regions/plan and use a managed MySQL provider (external).
-# Render native managed databases are PostgreSQL; this project uses MySQL (external provider) as specified.
+# Example Render blueprint. Adjust names/regions/plan.
+# This project now supports PostgreSQL (recommended for Render Postgres). Use external or Render Postgres.
 services:
   - type: web
     name: gallery-backend
