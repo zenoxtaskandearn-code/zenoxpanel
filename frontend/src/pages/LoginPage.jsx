@@ -51,7 +51,7 @@ export default function LoginPage() {
                 <span className="text-sm font-medium text-slate-700 dark:text-slate-300">Full name</span>
                 <div className="mt-1 relative">
                   <User size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
-                  <input name="name" required value={form.name} onChange={onChange} className="w-full rounded-lg border bg-transparent pl-9 pr-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-slate-300 dark:focus:ring-slate-700" placeholder="Admin name" />
+                  <input name="name" autoComplete="name" required value={form.name} onChange={onChange} className="w-full rounded-lg border bg-transparent pl-9 pr-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-slate-300 dark:focus:ring-slate-700" placeholder="Admin name" />
                 </div>
               </label>
             )}
@@ -59,14 +59,14 @@ export default function LoginPage() {
               <span className="text-sm font-medium text-slate-700 dark:text-slate-300">Email</span>
               <div className="mt-1 relative">
                 <Mail size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
-                <input name="email" type="email" required value={form.email} onChange={onChange} className="w-full rounded-lg border bg-transparent pl-9 pr-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-slate-300 dark:focus:ring-slate-700" placeholder="admin@example.com" />
+                <input name="email" type="email" autoComplete="email" required value={form.email} onChange={onChange} className="w-full rounded-lg border bg-transparent pl-9 pr-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-slate-300 dark:focus:ring-slate-700" placeholder="admin@example.com" />
               </div>
             </label>
             <label className="block">
               <span className="text-sm font-medium text-slate-700 dark:text-slate-300">Password</span>
               <div className="mt-1 relative">
                 <Lock size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
-                <input name="password" type="password" required minLength={8} value={form.password} onChange={onChange} className="w-full rounded-lg border bg-transparent pl-9 pr-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-slate-300 dark:focus:ring-slate-700" placeholder="Minimum 8 characters" />
+                <input name="password" type="password" autoComplete={mode === 'login' ? 'current-password' : 'new-password'} required minLength={8} value={form.password} onChange={onChange} className="w-full rounded-lg border bg-transparent pl-9 pr-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-slate-300 dark:focus:ring-slate-700" placeholder="Minimum 8 characters" />
               </div>
             </label>
             {mode === 'register' && (
@@ -74,7 +74,7 @@ export default function LoginPage() {
                 <span className="text-sm font-medium text-slate-700 dark:text-slate-300">Invite code (if required)</span>
                 <div className="mt-1 relative">
                   <KeyRound size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
-                  <input name="inviteCode" value={form.inviteCode} onChange={onChange} className="w-full rounded-lg border bg-transparent pl-9 pr-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-slate-300 dark:focus:ring-slate-700" placeholder="Optional" />
+                  <input name="inviteCode" autoComplete="off" value={form.inviteCode} onChange={onChange} className="w-full rounded-lg border bg-transparent pl-9 pr-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-slate-300 dark:focus:ring-slate-700" placeholder="Optional" />
                 </div>
               </label>
             )}
