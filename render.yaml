@@ -1,32 +1,43 @@
-# Example Render blueprint. Adjust names/regions/plan.
-# This project now supports PostgreSQL (recommended for Render Postgres). Use external or Render Postgres.
+# Render Blueprint - deploy from Render Dashboard: New > Blueprint > select this repo
+# After blueprint loads, fill in SECRET values marked sync:false (DB password etc.).
+# Do NOT commit real secrets.
+
 services:
   - type: web
     name: gallery-backend
     runtime: docker
     plan: free
+    region: oregon
     rootDir: backend
     dockerfilePath: ./Dockerfile
     healthCheckPath: /actuator/health
     envVars:
       - key: SPRING_PROFILES_ACTIVE
         value: prod
-      - key: PORT
-        value: 8080
       - key: SPRING_DATASOURCE_URL
-        sync: false
+        value: jdbc:postgresql://dpg-dc0l5gc0916s73c30k90-a.oregon-postgres.render.com:5432/ugda?sslmode=require
       - key: SPRING_DATASOURCE_USERNAME
-        sync: false
+        value: ugda_user
       - key: SPRING_DATASOURCE_PASSWORD
         sync: false
       - key: JWT_SECRET
         generateValue: true
+      - key: JWT_ACCESS_MINUTES
+        value: "30"
+      - key: JWT_REFRESH_DAYS
+        value: "14"
       - key: ADMIN_REGISTRATION_ENABLED
-        value: "false"
+        value: "true"
+      - key: ADMIN_REGISTRATION_INVITE_CODE
+        sync: false
       - key: CORS_ALLOWED_ORIGINS
-        sync: false
+        value: https://gallery-frontend.onrender.com
       - key: WS_ALLOWED_ORIGINS
-        sync: false
+        value: https://gallery-frontend.onrender.com
+      - key: RATE_LIMIT_RPM
+        value: "120"
+      - key: OPERATION_EXPIRY_MINUTES
+        value: "30"
 
   - type: web
     name: gallery-frontend
@@ -36,7 +47,7 @@ services:
     staticPublishPath: dist
     envVars:
       - key: VITE_API_BASE_URL
-        sync: false
+        value: https://gallery-backend.onrender.com
     routes:
       - type: rewrite
         source: /*
